@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="iStore Premium - Toko iPhone terpercaya">
+  <title>iStore Premium</title>
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/user.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="logo-icon">🍎</span>
+      <span class="logo-text" id="nav-store-name">iStore Premium</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#products" class="nav-link">Produk</a>
+      <a href="#about" class="nav-link">Tentang</a>
+      <a href="#payment" class="nav-link">Pembayaran</a>
+      <a href="#contact" class="nav-link">Kontak</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-primary btn-sm" id="navWaBtn">
+        <span>💬</span> Chat WhatsApp
+      </button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#products" class="mobile-link">Produk</a>
+    <a href="#about" class="mobile-link">Tentang Kami</a>
+    <a href="#payment" class="mobile-link">Cara Pembayaran</a>
+    <a href="#contact" class="mobile-link">Kontak</a>
+  </div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge fade-in">
+      <span>✦</span> Terpercaya & Bergaransi
+    </div>
+    <h1 class="hero-title slide-up" id="heroTitle">iPhone Berkualitas, Harga Terbaik</h1>
+    <p class="hero-sub fade-in" id="heroSub">Tersedia seri iPhone 11 hingga 17 Pro Max, garansi resmi & terpercaya.</p>
+    <div class="hero-actions slide-up">
+      <a href="#products" class="btn btn-primary btn-lg">
+        <span>📱</span> Lihat Produk
+      </a>
+      <button class="btn btn-secondary btn-lg" id="heroWaBtn">
+        <span>💬</span> Tanya Admin
+      </button>
+    </div>
+    <div class="hero-stats slide-up">
+      <div class="hero-stat">
+        <span class="stat-num" id="statProducts">0</span>
+        <span class="stat-label">Produk</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="stat-num" id="statSold">0+</span>
+        <span class="stat-label">Terjual</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Trusted</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-phone">
+    <div class="phone-mockup">
+      <div class="phone-inner">📱</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER & SEARCH -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Produk Kami</h2>
+      <p class="section-sub">Pilih iPhone impianmu dari koleksi terlengkap kami</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Cari iPhone...">
+      </div>
+      <div class="filter-row">
+        <select class="filter-select" id="filterSeries">
+          <option value="">Semua Seri</option>
+        </select>
+        <select class="filter-select" id="filterInternal">
+          <option value="">Semua Storage</option>
+        </select>
+        <select class="filter-select" id="filterCategory">
+          <option value="">Semua Kategori</option>
+          <option value="iBox">iBox</option>
+          <option value="Inter Beacukai">Inter Beacukai</option>
+          <option value="Refurbish">Refurbish</option>
+        </select>
+        <select class="filter-select" id="filterSort">
+          <option value="default">Urutan Default</option>
+          <option value="price-low">Harga Terendah</option>
+          <option value="price-high">Harga Tertinggi</option>
+          <option value="newest">Terbaru</option>
+          <option value="popular">Terpopuler</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+      <!-- Products rendered here -->
+    </div>
+
+    <div class="empty-state hidden" id="noProducts">
+      <div class="icon">📭</div>
+      <h3>Produk Tidak Ditemukan</h3>
+      <p>Coba ubah filter pencarian atau hubungi admin untuk stok terbaru</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / TENTANG -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-eyebrow">Tentang Kami</div>
+        <h2 class="section-title" id="aboutStoreNameDisplay">iStore Premium</h2>
+        <p class="about-desc" id="aboutDesc">Toko iPhone terpercaya dengan produk original, iBox, dan inter-beacukai berkualitas tinggi.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <span class="feature-icon">✅</span>
+            <div>
+              <strong>100% Produk Original</strong>
+              <p>Semua produk bergaransi resmi atau terverifikasi kondisinya</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="feature-icon">🚀</span>
+            <div>
+              <strong>Pengiriman Cepat</strong>
+              <p>Aman, terpercaya, dan dikemas dengan baik</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="feature-icon">💬</span>
+            <div>
+              <strong>CS Responsif</strong>
+              <p>Admin siap membantu via chat web atau WhatsApp</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="feature-icon">🔄</span>
+            <div>
+              <strong>Negosiasi Harga</strong>
+              <p>Harga bisa diskusi, hubungi admin langsung</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-address hidden" id="aboutAddressWrap">
+          <span>📍</span> <span id="aboutAddress"></span>
+        </div>
+      </div>
+      <div class="about-socials-card">
+        <div class="socials-title">Temukan Kami</div>
+        <div class="socials-list" id="socialsList">
+          <!-- Rendered by JS -->
+        </div>
+        <button class="btn btn-primary w-full mt-4" id="aboutWaBtn">
+          💬 Hubungi via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="payment-section" id="payment">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Cara Pembayaran</h2>
+      <p class="section-sub">Pilih metode pembayaran yang paling nyaman untukmu</p>
+    </div>
+    <div class="payment-steps">
+      <div class="pay-step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Pilih Produk</strong>
+          <p>Pilih iPhone yang kamu inginkan dan hubungi admin</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="pay-step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Konfirmasi</strong>
+          <p>Admin akan konfirmasi ketersediaan dan detail produk</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="pay-step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Transfer</strong>
+          <p>Transfer ke rekening yang tersedia di bawah</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="pay-step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Produk Dikirim</strong>
+          <p>Setelah pembayaran terverifikasi, produk langsung dikirim</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="bank-title">Rekening Pembayaran</h3>
+    <div class="bank-list" id="bankList">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-orb"></div>
+      <h2 class="cta-title">Siap Punya iPhone Baru?</h2>
+      <p class="cta-sub">Hubungi kami sekarang dan dapatkan penawaran terbaik!</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary btn-lg" id="ctaWaBtn">
+          <span>💬</span> Chat WhatsApp Sekarang
+        </button>
+        <button class="btn btn-secondary btn-lg" onclick="Modal.openModal('chatModal')">
+          <span>💭</span> Chat di Website
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🍎</span> <span id="footerStoreName">iStore Premium</span>
+        </div>
+        <p id="footerDesc">Toko iPhone terpercaya</p>
+      </div>
+      <div class="footer-links">
+        <strong>Navigasi</strong>
+        <a href="#products">Produk</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#payment">Pembayaran</a>
+        <a href="#contact">Kontak</a>
+      </div>
+      <div class="footer-links">
+        <strong>Kategori</strong>
+        <a href="#products" onclick="document.getElementById('filterCategory').value='iBox'">iBox</a>
+        <a href="#products" onclick="document.getElementById('filterCategory').value='Inter Beacukai'">Inter Beacukai</a>
+        <a href="#products" onclick="document.getElementById('filterCategory').value='Refurbish'">Refurbish</a>
+      </div>
+      <div class="footer-contact">
+        <strong>Kontak</strong>
+        <div id="footerSocials"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footerStoreNameBottom">iStore Premium</span> &copy; <span id="footerYear"></span>
+      <span>· Dibuat dengan ❤️ untuk pelanggan setia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA BUTTON -->
+<a class="wa-fab" id="waFab" title="Chat WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.557 4.117 1.532 5.844L.057 23.214l5.524-1.449A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.802-.524-5.393-1.44l-.386-.229-4.003 1.049 1.067-3.9-.251-.399C2.048 15.695 1.5 13.906 1.5 12 1.5 6.201 6.201 1.5 12 1.5S22.5 6.201 22.5 12 17.799 22 12 22z"/>
+  </svg>
+</a>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal modal-lg" id="productModalContent">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalProductName">Detail Produk</h3>
+      <button class="modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="product-detail-layout">
+        <div class="detail-gallery">
+          <div class="gallery-main" id="galleryMain"></div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+        <div class="detail-info" id="detailInfo"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE CHAT MODAL -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">💬 Chat dengan Admin</h3>
+      <button class="modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-welcome">
+          <div class="chat-avatar">🍎</div>
+          <div class="chat-bubble chat-admin">
+            Halo! 👋 Selamat datang di <strong id="chatStoreName">iStore Premium</strong>. Ada yang bisa kami bantu?
+          </div>
+        </div>
+        <div id="chatMessages"></div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" class="input chat-input" id="chatInput" placeholder="Ketik pesan...">
+        <button class="btn btn-primary" id="chatSendBtn">Kirim</button>
+      </div>
+      <div class="chat-or">
+        <span>atau langsung via</span>
+      </div>
+      <button class="btn btn-secondary w-full" id="chatWaBtn">
+        💬 Lanjut di WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- BANK COPY TOAST helper -->
+<script src="assets/js/core.js"></script>
+<script src="assets/js/user.js"></script>
+</body>
+</html>

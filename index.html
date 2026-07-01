@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel – iStore Premium</title>
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+<!-- ========== LOGIN SCREEN ========== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-bg">
+    <div class="login-orb login-orb-1"></div>
+    <div class="login-orb login-orb-2"></div>
+  </div>
+  <div class="login-card slide-up">
+    <div class="login-logo">
+      <span>🍎</span>
+      <span class="logo-text-grad" id="loginStoreName">iStore Premium</span>
+    </div>
+    <h2 class="login-title">Admin Panel</h2>
+    <p class="login-sub">Masukkan PIN untuk melanjutkan</p>
+    <div class="pin-display" id="pinDisplay">
+      <span class="pin-dot" id="pd0"></span>
+      <span class="pin-dot" id="pd1"></span>
+      <span class="pin-dot" id="pd2"></span>
+      <span class="pin-dot" id="pd3"></span>
+    </div>
+    <div class="pin-keypad">
+      <button class="pin-key" data-v="1">1</button>
+      <button class="pin-key" data-v="2">2</button>
+      <button class="pin-key" data-v="3">3</button>
+      <button class="pin-key" data-v="4">4</button>
+      <button class="pin-key" data-v="5">5</button>
+      <button class="pin-key" data-v="6">6</button>
+      <button class="pin-key" data-v="7">7</button>
+      <button class="pin-key" data-v="8">8</button>
+      <button class="pin-key" data-v="9">9</button>
+      <button class="pin-key pin-clear" data-v="clear">✕</button>
+      <button class="pin-key" data-v="0">0</button>
+      <button class="pin-key pin-del" data-v="del">⌫</button>
+    </div>
+    <p class="login-hint">PIN default: <strong>1234</strong> (ubah di Settings)</p>
+    <a href="../userindex.html" class="login-back">← Kembali ke Toko</a>
+  </div>
+</div>
+
+<!-- ========== ADMIN DASHBOARD ========== -->
+<div class="admin-layout hidden" id="adminLayout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-logo">
+        <span>🍎</span>
+        <span id="sidebarStoreName">iStore Premium</span>
+      </div>
+      <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-tab="dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
+      <button class="nav-item" data-tab="products">
+        <span class="nav-icon">📱</span>
+        <span class="nav-label">Produk</span>
+        <span class="nav-badge" id="navBadgeProducts"></span>
+      </button>
+      <button class="nav-item" data-tab="chat">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Pesan</span>
+        <span class="nav-badge" id="navBadgeChats"></span>
+      </button>
+      <button class="nav-item" data-tab="transactions">
+        <span class="nav-icon">💰</span>
+        <span class="nav-label">Transaksi</span>
+      </button>
+      <button class="nav-item" data-tab="analytics">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Analitik</span>
+      </button>
+      <button class="nav-item" data-tab="settings">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Pengaturan</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../index.html" class="btn btn-ghost btn-sm w-full" target="_blank">🌐 Lihat Toko</a>
+      <button class="btn btn-ghost btn-sm w-full" id="logoutBtn">🔒 Keluar</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+
+    <!-- TOP BAR -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-mobile-btn" id="sidebarMobileBtn">☰</button>
+        <div class="topbar-breadcrumb" id="topbarBreadcrumb">Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-time" id="topbarTime"></div>
+        <div class="admin-avatar">A</div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <div class="admin-content">
+
+      <!-- TAB: DASHBOARD -->
+      <div class="tab-content active" id="tab-dashboard">
+        <div class="tab-header">
+          <h1 class="tab-title">Dashboard</h1>
+          <p class="tab-sub" id="dashGreeting">Selamat datang kembali!</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card-title">📱 Produk Stok Rendah</div>
+            <div id="lowStockList"></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-title">💬 Pesan Terbaru</div>
+            <div id="recentChats"></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-title">⭐ Produk Unggulan</div>
+            <div id="featuredList"></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-title">💰 Transaksi Terbaru</div>
+            <div id="recentTx"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PRODUCTS -->
+      <div class="tab-content" id="tab-products">
+        <div class="tab-header">
+          <div>
+            <h1 class="tab-title">Manajemen Produk</h1>
+            <p class="tab-sub">Kelola semua produk iPhone di toko Anda</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddProduct()">
+            + Tambah Produk
+          </button>
+        </div>
+        <div class="product-filter-bar">
+          <input type="text" class="input search-input-admin" id="adminSearchProduct" placeholder="🔍 Cari produk...">
+          <select class="input" id="adminFilterSeries" style="width:140px">
+            <option value="">Semua Seri</option>
+          </select>
+          <select class="input" id="adminFilterStatus" style="width:140px">
+            <option value="">Semua Status</option>
+            <option value="active">Aktif</option>
+            <option value="inactive">Non-Aktif</option>
+          </select>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="productsTable">
+            <thead>
+              <tr>
+                <th>Foto</th>
+                <th>Produk</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>Baterai</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB: CHAT -->
+      <div class="tab-content" id="tab-chat">
+        <div class="tab-header">
+          <h1 class="tab-title">Pesan Pelanggan</h1>
+          <p class="tab-sub">Semua pesan masuk dari halaman toko</p>
+        </div>
+        <div class="chat-admin-layout">
+          <div class="chat-sessions-panel">
+            <div class="chat-panel-head">Sesi Chat</div>
+            <div id="chatSessionsList"></div>
+          </div>
+          <div class="chat-conversation-panel">
+            <div class="chat-conv-header" id="chatConvHeader">
+              <span style="color:var(--text-muted)">Pilih sesi chat untuk melihat percakapan</span>
+            </div>
+            <div class="chat-conv-body" id="chatConvBody"></div>
+            <div class="chat-conv-input hidden" id="chatConvInput">
+              <input type="text" class="input" id="adminChatInput" placeholder="Tulis balasan...">
+              <button class="btn btn-primary" id="adminChatSendBtn">Kirim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: TRANSACTIONS -->
+      <div class="tab-content" id="tab-transactions">
+        <div class="tab-header">
+          <div>
+            <h1 class="tab-title">Transaksi</h1>
+            <p class="tab-sub">Catat dan pantau semua transaksi penjualan</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddTx()">+ Catat Transaksi</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Produk</th>
+                <th>Pembeli</th>
+                <th>Harga</th>
+                <th>Status</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody"></tbody>
+          </table>
+          <div class="empty-state hidden" id="txEmpty">
+            <div class="icon">💰</div>
+            <h3>Belum Ada Transaksi</h3>
+            <p>Catat transaksi pertama Anda</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: ANALYTICS -->
+      <div class="tab-content" id="tab-analytics">
+        <div class="tab-header">
+          <h1 class="tab-title">Analitik</h1>
+          <p class="tab-sub">Pantau performa toko Anda</p>
+        </div>
+        <div class="analytics-grid" id="analyticsGrid"></div>
+        <div class="analytics-row">
+          <div class="analytics-card">
+            <div class="analytics-card-title">📊 Penjualan per Kategori</div>
+            <div id="categoryChart"></div>
+          </div>
+          <div class="analytics-card">
+            <div class="analytics-card-title">📱 Produk Terlaris</div>
+            <div id="topProducts"></div>
+          </div>
+        </div>
+        <div class="analytics-card" style="margin-top:20px">
+          <div class="analytics-card-title">📅 Ringkasan Stok</div>
+          <div id="stockSummary"></div>
+        </div>
+      </div>
+
+      <!-- TAB: SETTINGS -->
+      <div class="tab-content" id="tab-settings">
+        <div class="tab-header">
+          <h1 class="tab-title">Pengaturan</h1>
+          <p class="tab-sub">Kelola informasi dan konfigurasi toko</p>
+        </div>
+        <div class="settings-grid">
+          <!-- Store Info -->
+          <div class="settings-section">
+            <div class="settings-section-title">🏪 Informasi Toko</div>
+            <div class="form-grid">
+              <div class="input-group">
+                <label>Nama Toko <span class="required">*</span></label>
+                <input type="text" class="input" id="setStoreName" placeholder="iStore Premium">
+              </div>
+              <div class="input-group">
+                <label>Alamat</label>
+                <input type="text" class="input" id="setAddress" placeholder="Jl. Raya No. 123...">
+              </div>
+              <div class="input-group" style="grid-column:1/-1">
+                <label>Deskripsi Toko</label>
+                <textarea class="input" id="setDescription" rows="3" placeholder="Deskripsi singkat tentang toko..."></textarea>
+              </div>
+              <div class="input-group">
+                <label>Hero Tagline</label>
+                <input type="text" class="input" id="setHeroTagline" placeholder="iPhone Berkualitas...">
+              </div>
+              <div class="input-group">
+                <label>Hero Subtext</label>
+                <input type="text" class="input" id="setHeroSubtext" placeholder="Tersedia seri...">
+              </div>
+            </div>
+            <button class="btn btn-primary mt-4" onclick="saveStoreSettings()">💾 Simpan Info Toko</button>
+          </div>
+
+          <!-- Contact / Socmed -->
+          <div class="settings-section">
+            <div class="settings-section-title">📲 Kontak & Sosial Media</div>
+            <div class="form-grid">
+              <div class="input-group">
+                <label>Nomor WhatsApp (dengan kode negara)</label>
+                <input type="text" class="input" id="setWhatsapp" placeholder="6281234567890">
+              </div>
+              <div class="input-group">
+                <label>Label Tombol WhatsApp</label>
+                <input type="text" class="input" id="setWaLabel" placeholder="Chat Admin">
+              </div>
+              <div class="input-group">
+                <label>Instagram (tanpa @)</label>
+                <input type="text" class="input" id="setInstagram" placeholder="username">
+              </div>
+              <div class="input-group">
+                <label>TikTok (tanpa @)</label>
+                <input type="text" class="input" id="setTiktok" placeholder="username">
+              </div>
+              <div class="input-group">
+                <label>Facebook</label>
+                <input type="text" class="input" id="setFacebook" placeholder="username">
+              </div>
+            </div>
+            <button class="btn btn-primary mt-4" onclick="saveContactSettings()">💾 Simpan Kontak</button>
+          </div>
+
+          <!-- Bank Accounts -->
+          <div class="settings-section">
+            <div class="settings-section-title">🏦 Rekening Bank</div>
+            <div id="bankSettingsList"></div>
+            <button class="btn btn-secondary mt-3" onclick="addBankField()">+ Tambah Rekening</button>
+            <button class="btn btn-primary mt-3" style="margin-left:10px" onclick="saveBankSettings()">💾 Simpan Rekening</button>
+          </div>
+
+          <!-- Security -->
+          <div class="settings-section">
+            <div class="settings-section-title">🔐 Keamanan</div>
+            <div class="form-grid">
+              <div class="input-group">
+                <label>PIN Saat Ini</label>
+                <input type="password" class="input" id="setPinCurrent" placeholder="••••" maxlength="4">
+              </div>
+              <div class="input-group">
+                <label>PIN Baru</label>
+                <input type="password" class="input" id="setPinNew" placeholder="••••" maxlength="4">
+              </div>
+              <div class="input-group">
+                <label>Konfirmasi PIN Baru</label>
+                <input type="password" class="input" id="setPinConfirm" placeholder="••••" maxlength="4">
+              </div>
+            </div>
+            <button class="btn btn-primary mt-4" onclick="changePin()">🔐 Ganti PIN</button>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="settings-section danger-zone">
+            <div class="settings-section-title">⚠️ Zona Bahaya</div>
+            <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px">Tindakan berikut tidak dapat dibatalkan. Harap berhati-hati.</p>
+            <button class="btn btn-danger" onclick="confirmReset()">🗑️ Reset Semua Data</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end admin-content -->
+  </main>
+</div><!-- end admin-layout -->
+
+<!-- ========== PRODUCT FORM MODAL ========== -->
+<div class="modal-overlay" id="productFormModal">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-header">
+      <h3 class="modal-title" id="productFormTitle">Tambah Produk</h3>
+      <button class="modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="formProductId">
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Seri iPhone <span class="required">*</span></label>
+          <select class="input" id="fSeries">
+            <option value="">-- Pilih Seri --</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Tipe / Model <span class="required">*</span></label>
+          <select class="input" id="fType">
+            <option value="">-- Pilih Seri Dulu --</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Internal Storage <span class="required">*</span></label>
+          <select class="input" id="fInternal">
+            <option value="">-- Pilih --</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Warna <span class="required">*</span></label>
+          <select class="input" id="fColor">
+            <option value="">-- Pilih --</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Kategori <span class="required">*</span></label>
+          <select class="input" id="fCategory">
+            <option value="">-- Pilih --</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Battery Health (%) <span class="required">*</span></label>
+          <input type="number" class="input" id="fBattery" min="1" max="100" placeholder="100">
+        </div>
+        <div class="input-group">
+          <label>Harga Jual (Rp) <span class="required">*</span></label>
+          <input type="number" class="input" id="fPrice" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label>Harga Coret (Rp) <small>(opsional)</small></label>
+          <input type="number" class="input" id="fPriceOld" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label>Stok <span class="required">*</span></label>
+          <input type="number" class="input" id="fStock" min="0" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label>Unit Terjual</label>
+          <input type="number" class="input" id="fSold" min="0" placeholder="0">
+        </div>
+        <div class="input-group" style="grid-column:1/-1">
+          <label>Deskripsi Detail <span class="required">*</span></label>
+          <textarea class="input" id="fDescription" rows="4" placeholder="Tulis deskripsi lengkap produk..."></textarea>
+        </div>
+        <div class="input-group" style="grid-column:1/-1">
+          <label>Foto Produk <span class="required">*</span> <small>(JPG/PNG, min 1 foto, maks 3MB/foto)</small></label>
+          <div class="photo-upload-area" id="photoUploadArea">
+            <div class="photo-upload-placeholder" id="photoPlaceholder">
+              <span style="font-size:32px">📷</span>
+              <span>Klik atau drag foto ke sini</span>
+              <span style="font-size:12px;color:var(--text-muted)">JPG, PNG – Bisa lebih dari 1 foto</span>
+            </div>
+            <input type="file" id="fPhotos" accept="image/jpeg,image/jpg,image/png,image/webp" multiple style="display:none">
+            <div class="photo-preview-grid" id="photoPreviewGrid"></div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Status Tampil</label>
+          <div class="toggle-wrap">
+            <label class="toggle-switch">
+              <input type="checkbox" id="fActive" checked>
+              <span class="toggle-slider"></span>
+            </label>
+            <span>Tampilkan di toko</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Produk Unggulan</label>
+          <div class="toggle-wrap">
+            <label class="toggle-switch">
+              <input type="checkbox" id="fFeatured">
+              <span class="toggle-slider"></span>
+            </label>
+            <span>Tandai sebagai unggulan ⭐</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-modal-close>Batal</button>
+        <button class="btn btn-primary" onclick="saveProduct()">💾 Simpan Produk</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSACTION FORM MODAL -->
+<div class="modal-overlay" id="txFormModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Catat Transaksi</h3>
+      <button class="modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="txFormId">
+      <div class="form-grid">
+        <div class="input-group" style="grid-column:1/-1">
+          <label>Pilih Produk <span class="required">*</span></label>
+          <select class="input" id="txProduct"></select>
+        </div>
+        <div class="input-group">
+          <label>Nama Pembeli <span class="required">*</span></label>
+          <input type="text" class="input" id="txBuyer" placeholder="Nama pembeli">
+        </div>
+        <div class="input-group">
+          <label>No. HP / WA Pembeli</label>
+          <input type="text" class="input" id="txPhone" placeholder="08xx...">
+        </div>
+        <div class="input-group">
+          <label>Harga Jual (Rp) <span class="required">*</span></label>
+          <input type="number" class="input" id="txPrice" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label>Metode Bayar</label>
+          <select class="input" id="txMethod">
+            <option value="Transfer">Transfer Bank</option>
+            <option value="Cash">Cash</option>
+            <option value="COD">COD</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Status</label>
+          <select class="input" id="txStatus">
+            <option value="Lunas">Lunas</option>
+            <option value="DP">DP / Uang Muka</option>
+            <option value="Pending">Pending</option>
+            <option value="Batal">Dibatalkan</option>
+          </select>
+        </div>
+        <div class="input-group" style="grid-column:1/-1">
+          <label>Catatan</label>
+          <textarea class="input" id="txNotes" rows="2" placeholder="Catatan tambahan..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-modal-close>Batal</button>
+        <button class="btn btn-primary" onclick="saveTx()">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <h3 class="modal-title" id="confirmTitle">Konfirmasi</h3>
+      <button class="modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <p id="confirmMsg" style="font-size:15px;color:var(--text-secondary);margin-bottom:20px"></p>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-modal-close>Batal</button>
+        <button class="btn btn-danger" id="confirmOkBtn">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>
